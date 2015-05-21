@@ -16,7 +16,7 @@
                 success: function (msg) {
                     console.log(msg.d);
                     $('#queueDisplay').empty();
-                    $('#queueDisplay').innerHTML(msg.d);
+                    $('#queueDisplay').html(msg.d);
                 },
                 error: function (msg) {
                     console.log(msg);
@@ -36,9 +36,9 @@
                 success: function (msg) {
                     $('#tableStuff').empty();
                     if (msg.d == "[]") {
-                        $('#tableStuff').innerHTML("No Results were Found");
+                        $('#tableStuff').html("No Results were Found");
                     } else {                  
-                        $('#tableStuff').innerHTML(msg.d);
+                        $('#tableStuff').html(msg.d.substring(1, msg.d.length - 1));
                     } 
                 },
                 error: function (msg) {
@@ -106,9 +106,9 @@
                 success: function (msg) {
                     $('#workerState').empty();
                     if (msg.d != []) {
-                        $('#workerState').innerHTML(msg.d);
+                        $('#workerState').html(msg.d.substring(1, msg.d.length - 1));
                     } else {
-                        $('#workerState').innerHTML("Loading");
+                        $('#workerState').html("Loading");
                     }
                 },
                 error: function (msg) {
@@ -127,9 +127,9 @@
                 success: function (msg) {
                     $('#cpu').empty();
                     if (msg.d != []) {
-                        $('#cpu').innerHTML(msg.d + "%");
+                        $('#cpu').html(msg.d.substring(1, msg.d.length - 1) + "%");
                     } else {
-                        $('#cpu').innerHTML("Loading");
+                        $('#cpu').html("Loading");
                     }
 
                 },
@@ -149,9 +149,9 @@
                 success: function (msg) {
                     $('#perform').empty();
                     if (msg.d != []) {
-                        $('#perform').innerHTML(msg.d);
+                        $('#perform').html(msg.d.substring(1, msg.d.length - 1));
                     } else {
-                        $('#perform').innerHTML("Loading");
+                        $('#perform').html("Loading");
                     }
 
                 },
@@ -164,16 +164,16 @@
         function checksPassed() {
             $.ajax({
                 type: "POST",
-                url: "WebService1.asmx/cpu",
+                url: "WebService1.asmx/checksPassed",
                 data: "{}",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (msg) {
                     $('#pass').empty();
                     if (msg.d != []) {
-                        $('#pass').innerHTML(msg.d);
+                        $('#pass').html(msg.d.substring(1, msg.d.length - 1));
                     } else {
-                        $('#pass').innerHTML("Loading");
+                        $('#pass').html("Loading");
                     }
 
                 },
@@ -193,9 +193,9 @@
                 success: function (msg) {
                     $('#ram').empty();
                     if (msg.d != []) {
-                        $('#ram').innerHTML(msg.d);
+                        $('#ram').html(msg.d.substring(1, msg.d.length - 1));
                     } else {
-                        $('#ram').innerHTML("loading");
+                        $('#ram').html("loading");
                     }
                 },
                 error: function (msg) {
@@ -213,10 +213,12 @@
                 dataType: "json",
                 success: function (msg) {
                     $('#lastTen').empty();
-                    $('#lastTen').append("Results for <b>" + document.getElementById("inputValue").value + "</b> <br>");
                     if (msg.d == "[]") {
-                        $('#lastTen').append("No Results Were Found");
-                    } else {
+                        $('#lastTen').html("No Results Were Found");
+                    } 
+                    else 
+                    {
+                        console.log(msg.d);
                         var text = msg.d.substring(1, msg.d.length - 1);
                         var res = text.split(",");
                         for (var i = 0; i < res.length; i++) {
@@ -231,11 +233,10 @@
         };
     </script>
 
+  
+    <input type="button" id="inputValue" onclick="findQueueCount()" value="Refresh Queue" />
     <div id="queueDisplay">
     </div>
-    <input type="button" id="inputValue" onclick="findQueueCount()" value="Refresh Queue" />
-    <p>Queue Count: </p>
-    <p>Worker State: </p>
     <input type="button" id="inputValue" onclick="findWorkerState()" value="Refresh Worker State" />
     <div id="workerState">
     </div>
@@ -253,7 +254,7 @@
     <input type="button" id="clear" onclick="cpuUse()" value="CPU Usage" />
     <div id="cpu">
     </div>
-    <input type="button" id="clear" onclick="mem()" value="RAM Usage" />
+    <input type="button" id="clear" onclick="mem()" value="RAM Available" />
     <br />
     <div id="ram">
     </div>

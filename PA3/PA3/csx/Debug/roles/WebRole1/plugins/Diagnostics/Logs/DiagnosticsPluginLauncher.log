@@ -1,0 +1,18 @@
+DiagnosticsPluginLauncher.exe Information: 0 : [5/21/2015 4:32:58 AM] At least one other instance of the launcher is running. Will wait until they all finish
+DiagnosticsPluginLauncher.exe Information: 0 : [5/21/2015 4:32:58 AM] Service running in Emulator Mode, will not wait/kill other instances of the launcher
+DiagnosticsPluginLauncher.exe Information: 0 : [5/21/2015 4:32:58 AM] Emulator config file set to C:\Users\bennyn\Desktop\PA3\PA3\csx\Debug\roles\WebRole1\approot\diagnostics.wadcfgx
+DiagnosticsPluginLauncher.exe Information: 0 : [5/21/2015 4:32:58 AM] DiagnosticsStoreRootPath set to: C:\Users\bennyn\AppData\Local\dftmp\Resources\e1b92347-ea1e-4297-84fd-c356a755e71b
+DiagnosticsPluginLauncher.exe Information: 0 : [5/21/2015 4:32:58 AM] Loading config file: C:\Users\bennyn\Desktop\PA3\PA3\csx\Debug\roles\WebRole1\approot\diagnostics.wadcfgx
+DiagnosticsPluginLauncher.exe Information: 0 : [5/21/2015 4:32:59 AM] Checking VM Type
+DiagnosticsPluginLauncher.exe Information: 0 : [5/21/2015 4:32:59 AM] Emulator config file set to C:\Users\bennyn\Desktop\PA3\PA3\csx\Debug\roles\WebRole1\approot\diagnostics.wadcfgx
+DiagnosticsPluginLauncher.exe Information: 0 : [5/21/2015 4:32:59 AM] Extension set to Emulator Mode
+DiagnosticsPluginLauncher.exe Information: 0 : [5/21/2015 4:32:59 AM] Reading XML configuration file
+DiagnosticsPluginLauncher.exe Information: 0 : [5/21/2015 4:32:59 AM] Bypassing private config decryption
+DiagnosticsPluginLauncher.exe Information: 0 : [5/21/2015 4:32:59 AM] Stopping the running plugin, if any
+DiagnosticsPluginLauncher.exe Information: 0 : [5/21/2015 4:33:03 AM] No DiagnosticsPlugin is running.
+DiagnosticsPluginLauncher.exe Information: 0 : [5/21/2015 4:33:03 AM] Killing any DiagnosticsPlugin that might remain.
+DiagnosticsPluginLauncher.exe Information: 0 : [5/21/2015 4:33:04 AM] Killing any MonAgentHost that might remain.
+DiagnosticsPluginLauncher.exe Information: 0 : [5/21/2015 4:33:06 AM] Diagnostics plugin stopped successfully
+DiagnosticsPluginLauncher.exe Information: 0 : [5/21/2015 4:33:06 AM] Resetting DiagnosticPlugin
+DiagnosticsPluginLauncher.exe Information: 0 : [5/21/2015 4:34:22 AM] DiagnosticsPlugin launched successfully with new configuration
+DiagnosticsPluginLauncher.exe Information: 0 : [5/21/2015 4:34:22 AM] DiagnosticPlugin exited with code 0

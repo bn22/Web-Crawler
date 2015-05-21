@@ -84,7 +84,7 @@ namespace WebRole1
                 .Where(TableQuery.GenerateFilterCondition("RowKey", QueryComparisons.Equal, urlInput));
             foreach (urlInfo entity in table.ExecuteQuery(findTitleName))
             {
-                results.Add(Uri.UnescapeDataString(entity.RowKey.ToString()));
+                results.Add(entity.getTitle.ToString());
             }
             return new JavaScriptSerializer().Serialize(results);
         }
@@ -170,7 +170,7 @@ namespace WebRole1
         {
             List<String> result = new List<String>();
             TableQuery<wStatus> newQuery = new TableQuery<wStatus>().Take(1);
-            foreach (wStatus entity in table.ExecuteQuery(newQuery))
+            foreach (wStatus entity in workerTable.ExecuteQuery(newQuery))
             {
                 result.Add(entity.getStatus.ToString());
             }

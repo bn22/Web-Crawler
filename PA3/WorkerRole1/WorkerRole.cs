@@ -58,17 +58,17 @@ namespace WorkerRole1
                             String url = message1.AsString;
                             if (url.Contains("http://bleacherreport.com/robots.txt"))
                             {
-                                wStatus newState1 = new wStatus("Loading CNN");
-                                newState1.getStatus = "Loading CNN";
-                                TableOperation insertOperation1 = TableOperation.Insert(newState);
+                                wStatus newState1 = new wStatus("Loading BleacherReport");
+                                newState1.getStatus = "Loading BleacherReport";
+                                TableOperation insertOperation1 = TableOperation.Insert(newState1);
                                 workerTable.Execute(insertOperation1);
                                 readXML("http://bleacherreport.com/sitemap/nba.xml");
                             }
                             else if (url.Contains("/robots.txt"))
                             {
-                                wStatus newState2 = new wStatus("Loading BleacherReport");
-                                newState2.getStatus = "Loading BleacherReport";
-                                TableOperation insertOperation2 = TableOperation.Insert(newState);
+                                wStatus newState2 = new wStatus("Loading CNN");
+                                newState2.getStatus = "Loading CNN";
+                                TableOperation insertOperation2 = TableOperation.Insert(newState2);
                                 workerTable.Execute(insertOperation2);
                                 WebClient client = new WebClient();
                                 Stream readWebRequest = client.OpenRead(url);
@@ -102,12 +102,15 @@ namespace WorkerRole1
                             {
                                 wStatus newState3 = new wStatus("Crawling");
                                 newState3.getStatus = "Crawling";
-                                TableOperation insertOperation3 = TableOperation.Insert(newState);
+                                TableOperation insertOperation3 = TableOperation.Insert(newState3);
                                 workerTable.Execute(insertOperation3);
                                 errorTable.CreateIfNotExists();
                                 table.CreateIfNotExists();
                                 readHTML(url);
                             }
+                            message = commandQueue.GetMessage();
+                            dashBoardCommand = message.AsString;
+                            checker.getCommand = dashBoardCommand;
                         }
                     }
                     catch (NullReferenceException e)

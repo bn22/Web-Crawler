@@ -104,6 +104,12 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (msg) {
+                    $('#workerState').empty();
+                    if (msg.d != []) {
+                        $('#workerState').innerHTML(msg.d);
+                    } else {
+                        $('#workerState').innerHTML("Loading");
+                    }
                 },
                 error: function (msg) {
                     console.log(msg);
@@ -119,8 +125,8 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (msg) {
+                    $('#cpu').empty();
                     if (msg.d != []) {
-                        $('#cpu').empty();
                         $('#cpu').innerHTML(msg.d + "%");
                     } else {
                         $('#cpu').innerHTML("Loading");
@@ -141,8 +147,8 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (msg) {
+                    $('#perform').empty();
                     if (msg.d != []) {
-                        $('#perform').empty();
                         $('#perform').innerHTML(msg.d);
                     } else {
                         $('#perform').innerHTML("Loading");
@@ -163,8 +169,8 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (msg) {
+                    $('#pass').empty();
                     if (msg.d != []) {
-                        $('#pass').empty();
                         $('#pass').innerHTML(msg.d);
                     } else {
                         $('#pass').innerHTML("Loading");
@@ -185,8 +191,8 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (msg) {
+                    $('#ram').empty();
                     if (msg.d != []) {
-                        $('#ram').empty();
                         $('#ram').innerHTML(msg.d);
                     } else {
                         $('#ram').innerHTML("loading");
@@ -206,6 +212,7 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (msg) {
+                    $('#lastTen').empty();
                     $('#lastTen').append("Results for <b>" + document.getElementById("inputValue").value + "</b> <br>");
                     if (msg.d == "[]") {
                         $('#lastTen').append("No Results Were Found");

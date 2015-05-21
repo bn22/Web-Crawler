@@ -1,0 +1,261 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <title>PA3 Dashboard</title>
+</head>
+<body>
+    <script>
+        function findQueueCount() {
+            $.ajax({
+                type: "POST",
+                url: "WebService1.asmx/queueCount",
+                data:"{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    console.log(msg.d);
+                    $('#queueDisplay').empty();
+                    $('#queueDisplay').innerHTML(msg.d);
+                },
+                error: function (msg) {
+                    console.log(msg);
+                }
+            });
+        };
+
+        function readTable() {
+            $.ajax({
+                type: "POST",
+                url: "WebService1.asmx/readTable",
+                data: JSON.stringify({
+                    urlInput: document.getElementById("userUrlValue").value
+                }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    $('#tableStuff').empty();
+                    if (msg.d == "[]") {
+                        $('#tableStuff').innerHTML("No Results were Found");
+                    } else {                  
+                        $('#tableStuff').innerHTML(msg.d);
+                    } 
+                },
+                error: function (msg) {
+                    console.log(msg);
+                }
+            });
+        };
+
+        function startButton() {
+            $.ajax({
+                type: "POST",
+                url: "WebService1.asmx/beginCrawler",
+                data: JSON.stringify({
+                    rootUrl: document.getElementById("rootValue").value
+                }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                },
+                error: function (msg) {
+                    console.log(msg);
+                }
+            });
+        };
+
+        function clearCrawler() {
+            $.ajax({
+                type: "POST",
+                url: "WebService1.asmx/clearCrawler",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                },
+                error: function (msg) {
+                    console.log(msg);
+                }
+            });
+        };
+
+
+        function endButton() {
+            $.ajax({
+                type: "POST",
+                url: "WebService1.asmx/endCrawler",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+
+                },
+                error: function (msg) {
+                    console.log(msg);
+                }
+            });
+        };
+
+        function findWorkerState() {
+            $.ajax({
+                type: "POST",
+                url: "WebService1.asmx/workerState",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                },
+                error: function (msg) {
+                    console.log(msg);
+                }
+            });
+        };
+
+        function cpuUse() {
+            $.ajax({
+                type: "POST",
+                url: "WebService1.asmx/cpu",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    if (msg.d != []) {
+                        $('#cpu').empty();
+                        $('#cpu').innerHTML(msg.d + "%");
+                    } else {
+                        $('#cpu').innerHTML("Loading");
+                    }
+
+                },
+                error: function (msg) {
+                    console.log(msg);
+                }
+            });
+        };
+
+        function checkPerform() {
+            $.ajax({
+                type: "POST",
+                url: "WebService1.asmx/checksPerformed",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    if (msg.d != []) {
+                        $('#perform').empty();
+                        $('#perform').innerHTML(msg.d);
+                    } else {
+                        $('#perform').innerHTML("Loading");
+                    }
+
+                },
+                error: function (msg) {
+                    console.log(msg);
+                }
+            });
+        };
+
+        function checksPassed() {
+            $.ajax({
+                type: "POST",
+                url: "WebService1.asmx/cpu",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    if (msg.d != []) {
+                        $('#pass').empty();
+                        $('#pass').innerHTML(msg.d);
+                    } else {
+                        $('#pass').innerHTML("Loading");
+                    }
+
+                },
+                error: function (msg) {
+                    console.log(msg);
+                }
+            });
+        };
+
+        function mem() {
+            $.ajax({
+                type: "POST",
+                url: "WebService1.asmx/memUsage",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    if (msg.d != []) {
+                        $('#ram').empty();
+                        $('#ram').innerHTML(msg.d);
+                    } else {
+                        $('#ram').innerHTML("loading");
+                    }
+                },
+                error: function (msg) {
+                    console.log(msg);
+                }
+            });
+        };
+
+        function lastTen() {
+            $.ajax({
+                type: "POST",
+                url: "WebService1.asmx/lastTenUrl",
+                data: "{}",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (msg) {
+                    $('#lastTen').append("Results for <b>" + document.getElementById("inputValue").value + "</b> <br>");
+                    if (msg.d == "[]") {
+                        $('#lastTen').append("No Results Were Found");
+                    } else {
+                        var text = msg.d.substring(1, msg.d.length - 1);
+                        var res = text.split(",");
+                        for (var i = 0; i < res.length; i++) {
+                            $('#lastTen').append(res[i].substring(1, res[i].length - 1) + "<br>");
+                        }
+                    }
+                },
+                error: function (msg) {
+                    console.log(msg);
+                }
+            });
+        };
+    </script>
+
+    <div id="queueDisplay">
+    </div>
+    <input type="button" id="inputValue" onclick="findQueueCount()" value="Refresh Queue" />
+    <p>Queue Count: </p>
+    <p>Worker State: </p>
+    <input type="button" id="inputValue" onclick="findWorkerState()" value="Refresh Worker State" />
+    <div id="workerState">
+    </div>
+    <input type="text" id="rootValue" placeholder="Please Root Url" />
+    <input type="button" id="start" onclick="startButton()" value="Start Crawling" />
+    <br />
+    <input type="text" id="userUrlValue" placeholder="Please Url to Find Title" />
+    <input type="button" id="retrieve" onclick="readTable()" value="Retreve from Table" />
+    <br />
+    <div id="tableStuff">
+    </div>
+    <input type="button" id="clear" onclick="clearCrawler()" value="Clear Everything" />
+    <input type="button" id="clear" onclick="endButton()" value="Stop Crawler" />
+    <br />
+    <input type="button" id="clear" onclick="cpuUse()" value="CPU Usage" />
+    <div id="cpu">
+    </div>
+    <input type="button" id="clear" onclick="mem()" value="RAM Usage" />
+    <br />
+    <div id="ram">
+    </div>
+    <input type="button" id="clear" onclick="checkPerform()" value="Total URL Crawled" />
+    <div id="perform"></div>
+    <input type="button" id="clear" onclick="checksPassed()" value="Index Size" />
+    <div id="pass"></div>
+    <input type="button" id="clear" onclick="lastTen()" value="Find Last 10 URL Crawled" />
+    <div id="lastTen">
+    </div>
+</body>
+</html>

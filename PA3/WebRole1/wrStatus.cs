@@ -1,0 +1,24 @@
+﻿using Microsoft.WindowsAzure.Storage.Table;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace WebRole1
+{
+    public class wStatus : TableEntity
+    {
+        private String workerStatus;
+
+        public wStatus(String firstStatus)
+        {
+            this.PartitionKey = string.Format("{0:D19}", DateTime.MaxValue.Ticks - DateTime.UtcNow.Ticks);
+            this.RowKey = firstStatus;
+            this.workerStatus = null;
+        }
+
+        public wStatus() { }
+
+        public String getStatus { get; set; }
+    }
+}
